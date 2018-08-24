@@ -39,6 +39,20 @@ class CommentApp extends React.Component {
     const comments = this.state.comments;
     let localStorage = window.localStorage;
 
+    let htmlRegexp = /<[^>]+>/g;
+
+    let authorCheck = this.state.newAuthor.match(htmlRegexp);
+    let textCheck = this.state.newText.match(htmlRegexp);
+
+    if (authorCheck != null) {
+      alert("Недопустимо вводить теги в поле Автор!");
+      return;
+    }
+    if (textCheck != null) {
+      alert("Недопустимо вводить теги в поле Текст!");
+      return;
+    }
+
     if (localStorage.length == 0) {
       comments.shift();
     }
